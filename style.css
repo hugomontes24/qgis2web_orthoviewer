@@ -10,6 +10,7 @@ html, body {
   width: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 #div-header {
@@ -24,13 +25,11 @@ html, body {
   font-size: 1.5rem;
 }
 
-#div-header h1 {
-  font-family: "Dosis", Arial, Helvetica, sans-serif;
-  margin: 0;
-  /* padding: 0.5rem; */
-  font-size: 0.9rem;
-  width: 15%;
-  text-align: center;
+#logo {
+  width: 10%;
+}
+#logo img {
+  width: 100%;
 }
 
 .mode {
@@ -107,9 +106,9 @@ html, body {
 }
 
 .compte {
-  width: 15%;
+  width: 20%;
   height: 100%;
-  background-color: #777;
+  background-color: #000000;
   /* margin-left: 1rem;   */
 }
 
@@ -135,7 +134,7 @@ html, body {
 
 #map-controls { /* rectangle des boutons de contrôle */
   position: absolute;
-  top: 140px;
+  top: 10px;
   left: 10px;
   z-index: 1000; /* au-dessus de Leaflet */
   display: flex;
@@ -149,12 +148,8 @@ html, body {
   margin-bottom: 4px;
 }
 
-.container_timelapse {
-  display: none;
-}
-
-.container_timelapse.active {
-  display: block;
+#map_div.fullscreen_mode {
+  width: 100%;
 }
 
 .map-btn {
@@ -174,7 +169,22 @@ html, body {
   color: white;
 }
 
+.map-btn.fullscreen_btn {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.map-btn.fullscreen_btn.active {
+  background: #2c7be5;
+  color: white;
+}
+
 #sidebar_div {
+  display: block;
   width: 20%;
   height: 100%;
   background-color: black;
@@ -186,6 +196,10 @@ html, body {
 #sidebar_div h3 {
   /* text-align: center; */
   margin-top: 1rem;
+}
+
+#sidebar_div.fullscreen_mode {
+  display: none;
 }
 
 #picture_container {
