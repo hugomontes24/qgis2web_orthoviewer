@@ -1,6 +1,18 @@
 // *****************
 // *** FUNCTIONS  ***
 // *****************
+
+function setActiveBtn(activeBtn) {  // highlight the active button
+    document.querySelectorAll(".map-btn").forEach(btn =>
+        btn.classList.remove("active")
+    );
+    activeBtn.classList.add("active");
+}
+
+function toggleActiveBtn(activeBtn) {  // highlight the active button
+    activeBtn.classList.toggle("active");
+}
+
 function createSiteListUlLi(site) {
     const li = document.createElement('li');
     li.dataset.id = site.id;
@@ -32,3 +44,4 @@ function photosFromGeoJSON(geojson) {
         return new Photo(p.fid, p.photo_web, f.geometry.coordinates);
     });
 }
+
