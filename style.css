@@ -207,4 +207,23 @@ html, body {
 }
 #picture_container img {
   width: 100%;
+}
+
+.pourcentage .div_etat {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
+}
+.pourcentage .div_etat .etat_color {
+  height: 15px;
+}
+.pourcentage #span_normal {
+  background-color: rgb(145, 82, 45);
+}
+.pourcentage #span_attention {
+  background-color: rgb(218, 165, 32);
+}
+.pourcentage #span_danger {
+  background-color: rgb(178, 34, 34);
 }/*# sourceMappingURL=style.css.map */

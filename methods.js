@@ -2,6 +2,16 @@
 // *** FUNCTIONS  ***
 // *****************
 
+function getPhotosCountByEtat(etat){ // retourne le nombre de photos avec etat = 0
+    return photos.filter(p => p.etat === etat).length;
+}
+
+function getPourcentagePhotos(partialPhotos){ // retourne le pourcentage de photos par etat
+    const total = photos.length;
+    if (total === 0) return 0;
+    return Math.round(partialPhotos / total * 100);
+}
+
 function setActiveBtn(activeBtn) {  // highlight the active button
     document.querySelectorAll(".map-btn").forEach(btn =>
         btn.classList.remove("active")
@@ -41,7 +51,7 @@ function getPhotoById(photoId){
 function photosFromGeoJSON(geojson) {
     return geojson.features.map(f => {
         const p = f.properties;        
-        return new Photo(p.fid, p.photo_web, f.geometry.coordinates);
+        return new Photo(p.fid, p.photo_web, p.etat, f.geometry.coordinates);
     });
 }
 

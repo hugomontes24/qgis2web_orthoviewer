@@ -210,3 +210,26 @@ html, body {
     }
 }
 
+.pourcentage{
+    .div_etat{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-bottom: .5rem;
+        .etat_color{
+            height: 15px;
+        }
+    }
+    #span_normal{
+        background-color: rgb(145, 82, 45); // marron
+    }  
+    
+    #span_attention{
+        background-color: rgb(218, 165, 32); // doré
+    }
+
+    #span_danger{
+        background-color: rgb(178, 34, 34); // rouge foncé
+    }
+}
+

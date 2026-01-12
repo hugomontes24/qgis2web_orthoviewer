@@ -11,22 +11,42 @@ const btnFullscreen = document.getElementById("btn_fullscreen");
 const mapDiv = document.getElementById("map_div");
 const sidebarDiv =  document.getElementById("sidebar_div");
 
+const spanNormal = document.getElementById("span_normal");
+const spanAttention = document.getElementById("span_attention");
+const spanDanger = document.getElementById("span_danger");
 
+let normalCount = 0;
+const spanNormalCount = document.getElementById("span_normal_count");
+const spanAttentionCount = document.getElementById("span_attention_count");
+const spanDangerCount = document.getElementById("span_danger_count");
+let attentionCount = 0;
+let dangerCount = 0;
+
+let chosenPhoto = null; // instance of Photo class
 
 // **************************
 // ****  MAIN EXECUTION  *****
 // **************************
 document.addEventListener('DOMContentLoaded', function () {
-    
+
+    normalCount = getPhotosCountByEtat(0); // photos with etat = 0
+    spanNormal.style.width = `${ getPourcentagePhotos(normalCount)}%`;
+    spanNormalCount.innerHTML = getPourcentagePhotos(normalCount) ;
+
+    attentionCount = getPhotosCountByEtat(1); // photos with etat = 1
+    spanAttention.style.width = `${getPourcentagePhotos(attentionCount)}%`;
+    spanAttentionCount.innerHTML = getPourcentagePhotos(attentionCount) ;
+
+    dangerCount = getPhotosCountByEtat(2); // photos with etat = 2
+    spanDanger.style.width = `${getPourcentagePhotos(dangerCount)}%`;
+    spanDangerCount.innerHTML = getPourcentagePhotos(dangerCount) ;
+
     window.addEventListener('message', function(e){
 
         if (e.data.type === "PHOTO_CLICK"){
 
             chosenPhoto = getPhotoById(e.data.id); // class Photo
             const [lng,lat] = chosenPhoto.coordinates
-
-            console.log(lng,lat);
-            
             
             chosenPictureElmt.src = `${basepath}${chosenPhoto.name}`;
             spanPhotoName.innerHTML= chosenPhoto.name;
