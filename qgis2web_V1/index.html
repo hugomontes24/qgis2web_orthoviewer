@@ -7,7 +7,7 @@
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css">
-        <link rel="stylesheet" href="css/L.Control.Layers.Tree.css">
+        <!-- <link rel="stylesheet" href="css/L.Control.Layers.Tree.css"> -->
         <link rel="stylesheet" href="css/qgis2web.css">
         <link rel="stylesheet" href="css/fontawesome-all.min.css">
         <link rel="stylesheet" href="css/leaflet.photon.css">
@@ -27,7 +27,7 @@
         </div>
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script>
-        <script src="js/L.Control.Layers.Tree.min.js"></script>
+        <!-- <script src="js/L.Control.Layers.Tree.min.js"></script> -->
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -204,19 +204,35 @@
 
         }
 
-        function style_Photos_1_0() {
+        function style_Photos_1_0(feature) {
+            let colorPoint = 'rgba(35,35,35,1.0)';  // couleur du point
+            let fillColorPoint = 'rgba(145,82,45,1.0)'; // couleur de remplissage du point
+
+            if(feature.properties.etat === 1){
+                colorPoint = 'rgba(255,0,0,1.0)';  // rouge pour etat 1
+                fillColorPoint = 'rgba(255,100,100,1.0)';
+            }
+            else if(feature.properties.etat === 2){
+                colorPoint = 'rgba(0,0,255,1.0)';  // bleu pour etat 2
+                fillColorPoint = 'rgba(100,100,255,1.0)';
+            }
+            
+            
+
+          
+            
             return {
                 pane: 'pane_Photos_1',
                 radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(255,255,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(145,82,45,1.0)',
+                fillColor: fillColorPoint,
                 interactive: true,
             }
         }
