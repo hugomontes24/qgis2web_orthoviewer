@@ -208,6 +208,14 @@ html, body {
     img{
         width: 100%;
     }
+
+    img.warning{
+        border: 4px solid rgb(218, 165, 32); // doré
+    }
+    img.danger{
+        border: 4px solid rgb(178, 34, 34); // rouge foncé
+    }
+    
 }
 
 .pourcentage{

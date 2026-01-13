@@ -2,23 +2,20 @@
 // This script populates a sidebar with a list of sites from the GeoJSON data
 // CONSTANST AND VARIABLES  ***********************
 class Photo {
-    constructor(id, name, etat, coordinates) {
+    constructor(id, name, etat, description='', coordinates) {
         this.id = id;
         this.name = name;     
-        this.etat = etat;                      
+        this.etat = etat;  
+        this.description = description;                    
         this.coordinates = coordinates; // [lng, lat]
     }
 }
 
 let photos = []; // Array to hold Photos objects
 
-// const sitesListUl = document.getElementById('sites_list');// 5
 
 const modesArray = ['mode_home', 'mode_timelapse'];
 
-// *****************
-// *** FUNCTIONS  ***
-// *****************
 
 
 // **************************

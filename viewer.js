@@ -1,8 +1,11 @@
 const basepath = "./orthos/"
+
+let chosenPhoto = null; // instance of Photo class
 const chosenPictureElmt = document.getElementById("chosen_picture");
+const spanPhotoName = document.getElementById("photo_name");
 const spanLng = document.getElementById("lng");
 const spanLat = document.getElementById("lat");
-const spanPhotoName = document.getElementById("photo_name");
+const pDescription = document.getElementById("p_description");
 
 const btn2D = document.getElementById("btn-2d");
 const btn3D = document.getElementById("btn-3d");
@@ -22,7 +25,7 @@ const spanDangerCount = document.getElementById("span_danger_count");
 let attentionCount = 0;
 let dangerCount = 0;
 
-let chosenPhoto = null; // instance of Photo class
+
 
 // **************************
 // ****  MAIN EXECUTION  *****
@@ -52,9 +55,16 @@ document.addEventListener('DOMContentLoaded', function () {
             spanPhotoName.innerHTML= chosenPhoto.name;
             spanLng.innerHTML = lng;
             spanLat.innerHTML = lat;
+            pDescription.innerHTML = chosenPhoto.description;           
 
+            chosenPictureElmt.className = ""; // reset class
+    
+            if(chosenPhoto.etat === 1){
+                chosenPictureElmt.className = "warning";
+            }else if(chosenPhoto.etat === 2){
+                chosenPictureElmt.className = "danger";
+            }
 
-            
         }
 
     }); 

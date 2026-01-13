@@ -55,20 +55,8 @@
 
     <div id="sidebar_div" class="mode_home">
         
-        <h3>Photo</h3>
+        <!-- <h3>Photo</h3> -->
         <div>
-            <div id="picture_container">
-                <img id="chosen_picture" src="" alt="">    
-            </div>
-            <div class="picture_detail">
-                <div id="picture_name"></div>
-                <div id="picture_description">
-                    <p>Nom : <span id="photo_name"></span></p>
-                    <p>Longitude : <span id="lng"></span></p>
-                    <p>Latitude : <span id="lat"></span></p>
-                </div>
-
-            </div>
             <div class="pourcentage">
                 <div class="div_etat">
                     <span id="span_normal" class="etat_color normal"></span>
@@ -92,6 +80,22 @@
 
 
             </div>
+            <div id="picture_container">
+                <img id="chosen_picture" src="" alt="">   <!-- image border will be set in js "warning", "danger", "normal"-->
+            </div>
+            <div class="picture_detail">
+                <div id="picture_name"></div>
+                <div id="picture_description">
+                    <p>Nom : <span id="photo_name"></span></p>
+                    <p>Longitude : <span id="lng"></span></p>
+                    <p>Latitude : <span id="lat"></span></p>
+                    <p>A faire : <br>
+                        <span id="p_description"></span>
+                    </p>
+                </div>
+
+            </div>
+            
 
         </div>
     </div>

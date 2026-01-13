@@ -51,7 +51,11 @@ function getPhotoById(photoId){
 function photosFromGeoJSON(geojson) {
     return geojson.features.map(f => {
         const p = f.properties;        
-        return new Photo(p.fid, p.photo_web, p.etat, f.geometry.coordinates);
+        return new Photo(p.fid, 
+                        p.photo_web, 
+                        p.etat, 
+                        p.description, 
+                        f.geometry.coordinates);
     });
 }
 
