@@ -16,6 +16,8 @@ let photos = []; // Array to hold Photos objects
 
 const modesArray = ['mode_home', 'mode_timelapse'];
 
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
 
 
 // **************************
@@ -23,25 +25,20 @@ const modesArray = ['mode_home', 'mode_timelapse'];
 // **************************
 
 document.addEventListener('DOMContentLoaded', function () {
+
+    if(!SpeechRecognition) { console.log('Speech Recognition API not supported in this browser.');}
     
     if(!window.json_Photos_1) { console.error('GeoJSON data not found! **');return;} // 3
 
     photos = photosFromGeoJSON(window.json_Photos_1); // 4 - Convert GeoJSON features to Site objects (list of Site instances )
     
-    // sites.forEach(site => { // 7 - Populate the sidebar list
-    //     const li = createSiteListUlLi(site);
+    // const recognition = new SpeechRecognition();
+    // recognition.lang = 'fr-FR';
+    // recognition.continuous = false;
+    // recognition.interimResults = false;
+    // // recognition.maxAlternatives = 1;
 
-    //     site.description = `Company: ${site.company} <br> City: ${site.city}`;
-
-    //     // li.addEventListener('click', () => {  *****  TODO *****
-    //     //     displaySiteDetails(site);
-    //     //     // Optionally, you can also center the map on the site's coordinates here
-    //     // });
-      
-    //     const a = createSiteLink(site);
-    //     li.appendChild(a);
-    //     sitesListUl.appendChild(li);
-    // });
+    
 
 
 

@@ -59,3 +59,33 @@ function photosFromGeoJSON(geojson) {
     });
 }
 
+function toggleFullscreen() {
+    toggleActiveBtn(btnFullscreen);
+    mapDiv.classList.toggle("fullscreen_mode");
+    sidebarDiv.classList.toggle("fullscreen_mode");  
+}
+
+function normalScreen() {
+    btnFullscreen.classList.remove("active");
+    mapDiv.classList.remove("fullscreen_mode");
+    sidebarDiv.classList.remove("fullscreen_mode");  
+}
+
+
+// Start voice recognition. SpeechRecognition instance passed as argument
+function startVoiceRecognition(recognition) {
+    recognition.start();
+    console.log('Voice recognition started. Speak now.');
+}
+
+// Handle voice command
+function handleVoiceCommand(text) {
+    console.log('Handling voice command: ' + text);
+    // Add your command handling logic here
+    if (text.includes('plein écran')) {
+        toggleFullscreen();
+    } else if (text.includes('écran normal')) {
+        normalScreen();
+    }
+}
+

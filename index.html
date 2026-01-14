@@ -38,7 +38,10 @@
     <div id="map_div">
         <!-- The map iframe will be here -->
         <iframe id="map_iframe" src="./qgis2web_V1/index.html" frameborder="0"></iframe>
-        <div id="map-controls">           
+        <div id="map-controls"> 
+            <div class="div_micro">
+                <button id="btn_micro" class="map-btn">🎤</button>
+            </div>          
             <div class="b2d3d">
                 <button id="btn-2d" class="map-btn active">2D</button>
                 <button id="btn-3d" class="map-btn">3D</button>
@@ -98,6 +101,7 @@
             
 
         </div>
+        
     </div>
     <!-- <div id="sidebar_div" class="mode_home">  Il y aura en js un changement de classe pour le mode_timelapse
         
@@ -107,13 +111,14 @@
     
 
 </div><!-- app end -->
+
         
 </div><!-- main end -->
     
     <script src="qgis2web_V1/data/Photos_1.js"></script><!-- datas from map -->
-    <script src="methods.js"></script>
     <script src="custom.js"></script>
     <!-- <script src="custom_buttons.js"></script> -->
     <script src="viewer.js"></script>
+    <script src="methods.js"></script>
 </body>
 </html>

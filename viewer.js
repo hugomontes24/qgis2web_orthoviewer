@@ -7,6 +7,7 @@ const spanLng = document.getElementById("lng");
 const spanLat = document.getElementById("lat");
 const pDescription = document.getElementById("p_description");
 
+const btnMicro = document.getElementById("btn_micro");
 const btn2D = document.getElementById("btn-2d");
 const btn3D = document.getElementById("btn-3d");
 
@@ -24,6 +25,8 @@ const spanAttentionCount = document.getElementById("span_attention_count");
 const spanDangerCount = document.getElementById("span_danger_count");
 let attentionCount = 0;
 let dangerCount = 0;
+
+
 
 
 
@@ -74,9 +77,26 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     btnFullscreen.addEventListener("click", () => {
-        toggleActiveBtn(btnFullscreen);
-        mapDiv.classList.toggle("fullscreen_mode");
-        sidebarDiv.classList.toggle("fullscreen_mode");
+        toggleFullscreen();
+        // toggleActiveBtn(btnFullscreen);
+        // mapDiv.classList.toggle("fullscreen_mode");
+        // sidebarDiv.classList.toggle("fullscreen_mode");
+    });
+
+    btnMicro.addEventListener("click", () => {
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'fr-FR';
+        recognition.continuous = true;
+        recognition.interimResults = false;
+        startVoiceRecognition(recognition); 
+
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript.trim().toLowerCase();
+            console.log('Voice input received: ' + transcript);
+            // Here you can add code to handle the voice command   
+            handleVoiceCommand(transcript);         
+        }   
+       
     });
 
 
