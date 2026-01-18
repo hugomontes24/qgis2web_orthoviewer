@@ -12,22 +12,8 @@ function getPourcentagePhotos(partialPhotos){ // retourne le pourcentage de phot
     return Math.round(partialPhotos / total * 100);
 }
 
-function setActiveBtn(activeBtn) {  // highlight the active button
-    document.querySelectorAll(".map-btn").forEach(btn =>
-        btn.classList.remove("active")
-    );
-    activeBtn.classList.add("active");
-}
-
 function toggleActiveBtn(activeBtn) {  // highlight the active button
     activeBtn.classList.toggle("active");
-}
-
-function createSiteListUlLi(site) {
-    const li = document.createElement('li');
-    li.dataset.id = site.id;
-    li.style.cursor = 'pointer';
-    return li;
 }
 
 function createSiteLink(site) {   
@@ -71,6 +57,12 @@ function normalScreen() {
     sidebarDiv.classList.remove("fullscreen_mode");  
 }
 
+function filter_etat_function(filter_etat) {
+    mapIframe.contentWindow.postMessage({ 
+                type: "FILTER_PHOTOS", 
+                filter_etat: filter_etat }, // filter_etat = selected etat
+            "*");
+}
 
 // Start voice recognition. SpeechRecognition instance passed as argument
 function startVoiceRecognition(recognition) {
@@ -86,6 +78,30 @@ function handleVoiceCommand(text) {
         toggleFullscreen();
     } else if (text.includes('écran normal')) {
         normalScreen();
+    } else if (text.includes('filtrer point rouge')) {
+        filter_etat_function(2);
+    } else if (text.includes('filtrer point jaune')) {
+        filter_etat_function(1);
+    } else if (text.includes('filtrer point marron')) {
+        filter_etat_function(0);
+    } else if (text.includes('afficher tous les points')) {
+        filter_etat_function(-1);
     }
 }
 
+
+
+// function setActiveBtn(activeBtn) {  // highlight the active button
+//     document.querySelectorAll(".map-btn").forEach(btn =>
+//         btn.classList.remove("active")
+//     );
+//     activeBtn.classList.add("active");
+// }
+
+
+// function createSiteListUlLi(site) {
+//     const li = document.createElement('li');
+//     li.dataset.id = site.id;
+//     li.style.cursor = 'pointer';
+//     return li;
+// }

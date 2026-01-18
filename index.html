@@ -46,11 +46,28 @@
                 <button id="btn-2d" class="map-btn active">2D</button>
                 <button id="btn-3d" class="map-btn">3D</button>
             </div>
+
+            <div class="div_filter">
+                <button id="btn_filter" class="map-btn-filter">
+                    <img src="assets/pictures/white-filter-50.png" alt="icone filtre" />
+                </button>
+                <div id="display_filter">
+                    <label for="select_etat">État :</label>
+                    <select id="select_etat">
+                        <option value="-1" selected>Tous</option>
+                        <option value="0">Normal</option>
+                        <option value="1">À contrôler</option>
+                        <option value="2">À risque</option>
+                    </select>
+                </div>
+            </div>
+
             <div>
                 <button id="btn_fullscreen" class="map-btn fullscreen_btn">
                     &#x26F6;
                 </button>
             </div>
+            
             
         </div>
     

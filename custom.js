@@ -5,7 +5,7 @@ class Photo {
     constructor(id, name, etat, description='', coordinates) {
         this.id = id;
         this.name = name;     
-        this.etat = etat;  
+        this.etat = etat; // -1=undefined, 0=normal, 1=attention, 2=danger 
         this.description = description;                    
         this.coordinates = coordinates; // [lng, lat]
     }

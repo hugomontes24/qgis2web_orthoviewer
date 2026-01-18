@@ -38,6 +38,7 @@
         <script src="js/leaflet.photon.js"></script>
         <script src="js/leaflet-measure.js"></script>
         <script src="data/Photos_1.js"></script>
+        <script src="customLeaflet.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -138,7 +139,7 @@
             minNativeZoom: 0,
             maxNativeZoom: 19
         });
-        layer_OpenStreetMap_0;
+        // layer_OpenStreetMap_0;
         map.addLayer(layer_OpenStreetMap_0);
 
         function pop_Photos_1(feature, layer) {
@@ -210,22 +211,16 @@
 
             if(feature.properties.etat === 1){
                 colorPoint = 'rgba(218, 165, 32,1.0)';  // jaune pour etat 1
-
                 fillColorPoint = 'rgba(218, 165, 32,1.0)';
             }
             else if(feature.properties.etat === 2){
                 colorPoint = 'rgba(178, 34, 34,1.0)';  // rouge pour etat 2
-
                 fillColorPoint = 'rgba(178, 34, 34,1.0)';
             }
             
-            
-
-          
-            
             return {
                 pane: 'pane_Photos_1',
-                radius: 8.0,
+                radius: 8.0, // moi ******
                 opacity: 1,
                 color: 'rgba(255,255,255,1.0)',
                 dashArray: '',
@@ -241,12 +236,20 @@
         map.createPane('pane_Photos_1');
         map.getPane('pane_Photos_1').style.zIndex = 401;
         map.getPane('pane_Photos_1').style['mix-blend-mode'] = 'normal';
+       
+        // ajout du   filtre ***************
         var layer_Photos_1 = new L.geoJson(json_Photos_1, {
             attribution: '',
             interactive: true,
             dataVar: 'json_Photos_1',
             layerName: 'layer_Photos_1',
             pane: 'pane_Photos_1',
+            // ajout du   filtre ***************
+            filter: function(feature) {
+                    if (currentEtatFilter === -1) return true;
+                    return Number(feature.properties.etat) === currentEtatFilter;
+                },
+                // ajout du   filtre ***************
             onEachFeature: pop_Photos_1,
             pointToLayer: function (feature, latlng) {
                 var context = {
