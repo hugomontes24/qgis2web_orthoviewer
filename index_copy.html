@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="icon" type="image/svg+xml" href="assets/pictures/favicon.svg">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
-    
     <title>Iframe orthophotos</title>
 </head>
 <body>
@@ -39,19 +35,16 @@
 
 <div id="app">
 
-     <div id="map_div">
-        <div id="map"></div>
-
+    <div id="map_div">
+        <!-- The map iframe will be here -->
+        <iframe id="map_iframe" src="./qgis2web_V1/index.html" frameborder="0"></iframe>
         <div id="map-controls"> 
             <div class="div_micro">
-                <button id="btn_edit" class="map-btn">
-                    <img src="assets/pictures/edit-white-100.png" alt="icone edition" />
-                </button>
                 <button id="btn_micro" class="map-btn">🎤</button>
             </div>          
             <div class="b2d3d">
-                <button id="btn_2d" class="map-btn active">2D</button>
-                <button id="btn_3d" class="map-btn">3D</button>
+                <button id="btn-2d" class="map-btn active">2D</button>
+                <button id="btn-3d" class="map-btn">3D</button>
             </div>
 
             <div class="div_filter">
@@ -85,24 +78,26 @@
         <!-- <h3>Photo</h3> -->
         <div>
             <div class="pourcentage">
-                <div id="btn_etat_normal" class="div_etat">
-                        <span id="span_normal" class="etat_color normal"></span>               
+                <div class="div_etat">
+                    <span id="span_normal" class="etat_color normal"></span>
                     <div>
                         <span id="span_normal_count"></span> % photos normales
                     </div>
                 </div>
-                <div id="btn_etat_attention" class="div_etat">
+                <div class="div_etat">
                     <span id="span_attention" class="etat_color attention"></span>
                     <div>
                         <span id="span_attention_count"></span> % à controler
                     </div>
                 </div>
-                <div id="btn_etat_danger" class="div_etat">
+                <div class="div_etat">
                     <span id="span_danger" class="etat_color danger"></span>
                     <div>
                         <span id="span_danger_count"></span> % à risque
                     </div>
                 </div>
+
+
 
             </div>
             <div id="picture_container">
@@ -125,86 +120,23 @@
         </div>
         
     </div>
+    <!-- <div id="sidebar_div" class="mode_home">  Il y aura en js un changement de classe pour le mode_timelapse
+        
+            
+    </div> -->
 
-</div><!-- end app -->
+    
 
+</div><!-- app end -->
 
-
-</div><!-- end main -->
-<!-- <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"> -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
-<script src="js/Entities/Photo.js"></script>
-<script src="js/Entities/Zone.js"></script>
-<script src="js/Entities/ZoneDTO.js"></script>
-<script>
-    const mapContainer = document.getElementById('map');
-    const appMode = {
-        NORMAL: 'mode_normal',
-        EDIT: 'mode_edit',
-        ADD: 'mode_add',
-        EDIT_ZONE: 'mode_edit_zone'
-    };
-    let mode = appMode.NORMAL;
-    let photos = [];
-    let zones = [];
-  const map = L.map('map', {
-            zoomControl:false, maxZoom:20, minZoom:1
-        }).fitBounds([[47.66085213164272,-0.25238025002519376],[47.663393551031355,-0.24768706111963834]]);
-
-    // 2. Ajouter le fond de carte (OpenStreetMap)
-    const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-    const orthoBounds = [[47.662014, -0.250707],[47.662997, -0.248374 ]]; // sw, ne
-    const myImage = L.imageOverlay('assets/pictures/durtalEarth.jpg', orthoBounds).addTo(map);
-    // map.fitBounds(orthoBounds);   // 
-   
-   
-    // On crée un groupe de calques pour pouvoir les effacer d'un coup
-    const photoLayerGroup = L.layerGroup().addTo(map);
-
-    // 1. Créer un groupe pour les éléments dessinés
-    const zoneLayerGroup = new L.FeatureGroup().addTo(map);
-
-    // 2. Ajouter la barre d'outils de dessin
-    const drawControl = new L.Control.Draw({
-        edit: {
-            featureGroup: zoneLayerGroup
-        },
-        draw: {
-            polygon: true,   // On active les polygones
-            polyline: false, // On désactive ce dont on n'a pas besoin
-            rectangle: true,
-            circle: false,
-            marker: false
-        }
-    });
-    map.addControl(drawControl);
-
-    const baseMaps = {
-        "OpenStreetMap": osmLayer // L.tileLayer habituel, on peut mettre d'autres
-    }
-    const overlayMaps = {
-        "Photos" : photoLayerGroup,
-        "Zones dessinés" : zoneLayerGroup,
-        "Orthophoto" : myImage
-    }
-
-    L.control.layers( baseMaps, overlayMaps, {
-        collapsed : true,
-        position : 'bottomleft'
-    }).addTo(map);
-    var zoomControl = L.control.zoom({
-        position: 'bottomleft'
-    }).addTo(map);
-
-</script>
-<script src="js/services/servicePhotos.js"></script>
-<script src="js/services/servicesZones.js"></script>
-<script src="js/custom.js"></script>
-<script src="js/methodsZones.js"></script>
-<script src="js/methodsPhotos.js"></script>
-<script src="js/viewer.js"></script>
-
+        
+</div><!-- main end -->
+    
+    <script src="qgis2web_V1/data/Photos_1.js"></script><!-- datas from map -->
+    <script src="js/service.js"></script>
+    <script src="custom.js"></script>
+    <!-- <script src="custom_buttons.js"></script> -->
+    <script src="viewer.js"></script>
+    <script src="methods.js"></script>
 </body>
 </html>
